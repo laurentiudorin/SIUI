@@ -27,6 +27,17 @@ public class Main_Gui extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
+		JMenu mnNew = new JMenu("New");
+		menuBar.add(mnNew);
+		
+		JMenuItem mntmReteta = new JMenuItem("Reteta");
+		mntmReteta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Reteta();
+			}
+		});
+		mnNew.add(mntmReteta);
+		
 		JMenu mnExit = new JMenu("Exit");
 		menuBar.add(mnExit);
 		
