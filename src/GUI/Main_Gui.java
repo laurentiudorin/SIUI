@@ -11,6 +11,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class Main_Gui extends JFrame {
 
@@ -39,12 +42,16 @@ public class Main_Gui extends JFrame {
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(0, 0, 1276, 726);
+		lblNewLabel.setIcon(new ImageIcon("D:\\Workspace\\java\\SIUI\\Img\\Main_App_Background.jpg"));
+		contentPane.add(lblNewLabel);
 		setLocationRelativeTo(null);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		//setUndecorated(true);
 		setVisible(true);
 	}
-
 }

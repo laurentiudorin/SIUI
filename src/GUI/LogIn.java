@@ -64,9 +64,10 @@ public class LogIn extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					if (logindata.ReturnComfirmation(user_textField.getText(), password_textField.getText()) == true)
+					if (logindata.ReturnComfirmation(user_textField.getText(), password_textField.getText()))
 					{
-						JOptionPane.showMessageDialog(null, "Felicitari se pare ca te-ai logat");
+						new Main_Gui();
+						setVisible(false);
 					}else{
 						JOptionPane.showMessageDialog(null, "User or Password is INCORECT !!!");
 					}
