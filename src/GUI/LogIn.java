@@ -1,13 +1,20 @@
 package GUI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import Connection.GetLoginData;
 
 public class LogIn extends JFrame {
 
@@ -15,7 +22,7 @@ public class LogIn extends JFrame {
 	private JTextField user_textField;
 	private JPasswordField password_textField;
 
-	
+	GetLoginData logindata = new GetLoginData();
 
 	/**
 	 * Create the frame.
@@ -53,6 +60,23 @@ public class LogIn extends JFrame {
 		password_textField.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					if (logindata.ReturnComfirmation(user_textField.getText(), password_textField.getText()) == true)
+					{
+						JOptionPane.showMessageDialog(null, "Felicitari se pare ca te-ai logat");
+					}else{
+						JOptionPane.showMessageDialog(null, "User or Password is INCORECT !!!");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
 		btnLogin.setBounds(317, 223, 89, 23);
 		panel.add(btnLogin);
 		

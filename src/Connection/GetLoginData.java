@@ -1,6 +1,5 @@
 package Connection;
 
-import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,48 +7,37 @@ import java.sql.SQLException;
 
 public class GetLoginData extends DatabaseConection{
 	
-	public static void main(String[] argv) {
+	private static String user;
+	private static String password;
 
-		try {
-
-			selectRecordsFromTable();
-
-		} catch (SQLException e) {
-
-			System.out.println(e.getMessage());
-
-		}
-
+	
+	public boolean ReturnComfirmation(String user, String password) throws SQLException{
+		
+		this.user = user;
+		this.password = password;
+		return selectRecordsFromTable();
 	}
-
-	private static void selectRecordsFromTable() throws SQLException {
+	
+	private static boolean selectRecordsFromTable() throws SQLException {
 
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 
-		String selectSQL = "SELECT ID, USERNAME, PASSWORD, MOD FROM LOGIN WHERE ID = ?";
+		String selectSQL = "SELECT ID, USERNAME, PASSWORD, MOD FROM LOGIN WHERE USERNAME = ? AND PASSWORD =?";
 
 		try {
 			dbConnection = getDBConnection();
 			preparedStatement = dbConnection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, 12);
+			//preparedStatement.setInt(1, 12);
+			preparedStatement.setString(1, user);
+			preparedStatement.setString(2, password);
 			
 			// execute select SQL stetement
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-
-				int userid = rs.getInt("ID");
-				String username = rs.getString("USERNAME");
-				String password = rs.getString("PASSWORD");
-				String mod = rs.getString("MOD");
-				
-				System.out.println("userid : " + userid);
-				System.out.println("username : " + username);
-
+				return true;
 			}
-			
-			System.out.println("Am ajuns pana aici si nu am gasit nici un rezultat");
 
 		} catch (SQLException e) {
 
@@ -66,6 +54,7 @@ public class GetLoginData extends DatabaseConection{
 			}
 
 		}
+		return false;
 
 	}
 
