@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import Encryption.Sha256;
+
 public class InsertData extends DatabaseConection{
 	
 	public static void main(String[] argv) {
@@ -21,7 +23,7 @@ public class InsertData extends DatabaseConection{
 	}
 
 	private static void insertRecordIntoTable() throws SQLException {
-
+		
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -33,10 +35,10 @@ public class InsertData extends DatabaseConection{
 			dbConnection = getDBConnection();
 			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
 
-			preparedStatement.setInt(1, 13);
-			preparedStatement.setString(2, "Medic");
-			preparedStatement.setString(3, "pass");
-			preparedStatement.setString(4, "Medic");
+			preparedStatement.setInt(1, 4);
+			preparedStatement.setString(2, "user");
+			preparedStatement.setString(3, Sha256.sha256("user"));
+			preparedStatement.setString(4, "user");
 			//preparedStatement.setTimestamp(4, getCurrentTimeStamp());
 
 			// execute insert SQL stetement
