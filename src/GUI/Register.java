@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Connection.InsertDataMedic;
+import Connection.InsertDataPersoana;
 
 public class Register extends JFrame {
 
@@ -29,11 +30,11 @@ public class Register extends JFrame {
 	private JTextField textField_Ambulatoriu;
 	private JTextField textField_User;
 	private JTextField textField_Password;
-	
-	InsertDataMedic dm = new InsertDataMedic();
 	private JTextField textField_Mod;
-
 	
+	InsertDataPersoana 	dp = new InsertDataPersoana();
+	InsertDataMedic		dm = new InsertDataMedic();
+		
 
 	/**
 	 * Create the frame.
@@ -162,24 +163,30 @@ public class Register extends JFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dm.setCnp		(textField_Name.getText());
-				dm.setName		(textField_Pname.getText());
-				dm.setPname		(textField_CNP.getText());
-				dm.setBdate		(textField_Date.getText());
-				dm.setAddres	(textField_Addres.getText());
-				dm.setCountry	(textField_State.getText());
-				dm.setUserName	(textField_User.getText());
-				dm.setPassword	(textField_Password.getText());
-				dm.setMod		(textField_Mod.getText());
+				dp.setCnp		(textField_CNP.getText());
+				dp.setName		(textField_Name.getText());
+				dp.setPname		(textField_Pname.getText());
+				dp.setBdate		(textField_Date.getText());
+				dp.setAddres	(textField_Addres.getText());
+				dp.setCountry	(textField_State.getText());
+				dp.setUserName	(textField_User.getText());
+				dp.setPassword	(textField_Password.getText());
+				dp.setMod		(textField_Mod.getText());
+				
+				dm.setCnp		(textField_CNP.getText());
+				dm.setParafa	(textField_Parafa.getText());
+				dm.setDomeniu	(textField_Domain.getText());
+				dm.setAmbulatoriu(textField_Ambulatoriu.getText());
 				
 				try {
+					dp.insertRecordIntoTable();
 					dm.insertRecordIntoTable();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				dm.DeleteData();
+				dp.DeleteData();
 				
 				textField_Name.setText(null);
 				textField_Pname.setText(null);
