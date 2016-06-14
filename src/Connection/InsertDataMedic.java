@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import Encryption.Sha256;
 
 public class InsertDataMedic extends DatabaseConection{
@@ -85,7 +87,8 @@ public class InsertDataMedic extends DatabaseConection{
 			System.out.println("Record is inserted into DBUSER table!");
 
 		} catch (SQLException e) {
-
+			
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			System.out.println(e.getMessage());
 
 		} finally {

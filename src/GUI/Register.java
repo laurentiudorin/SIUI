@@ -31,28 +31,15 @@ public class Register extends JFrame {
 	private JTextField textField_Password;
 	
 	InsertDataMedic dm = new InsertDataMedic();
+	private JTextField textField_Mod;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Register frame = new Register();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public Register() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 498);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -118,7 +105,7 @@ public class Register extends JFrame {
 		panel.add(textField_State);
 		
 		JLabel lblUsser = new JLabel("ID Parafa");
-		lblUsser.setBounds(10, 211, 46, 14);
+		lblUsser.setBounds(10, 211, 150, 14);
 		panel.add(lblUsser);
 		
 		textField_Parafa = new JTextField();
@@ -162,6 +149,16 @@ public class Register extends JFrame {
 		textField_Password.setBounds(210, 330, 150, 20);
 		panel.add(textField_Password);
 		
+		JLabel lblMod = new JLabel("Mod");
+		lblMod.setBounds(10, 365, 46, 14);
+		panel.add(lblMod);
+		
+		textField_Mod = new JTextField();
+		textField_Mod.setColumns(10);
+		textField_Mod.setBounds(10, 384, 150, 20);
+		panel.add(textField_Mod);
+		
+		
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -171,11 +168,9 @@ public class Register extends JFrame {
 				dm.setBdate		(textField_Date.getText());
 				dm.setAddres	(textField_Addres.getText());
 				dm.setCountry	(textField_State.getText());
-				dm.setUserName	(textField_Parafa.getText());
-				dm.setPassword	(textField_Domain.getText());
-				dm.setMod		(textField_Ambulatoriu.getText());
 				dm.setUserName	(textField_User.getText());
 				dm.setPassword	(textField_Password.getText());
+				dm.setMod		(textField_Mod.getText());
 				
 				try {
 					dm.insertRecordIntoTable();
@@ -197,16 +192,24 @@ public class Register extends JFrame {
 				textField_Ambulatoriu.setText(null);
 				textField_User.setText(null);
 				textField_Password.setText(null);
+				textField_Mod.setText(null);		
 				
 				repaint();
 				
 			}
 		});
-		btnSave.setBounds(71, 378, 89, 23);
+		btnSave.setBounds(72, 415, 89, 23);
 		panel.add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(210, 378, 89, 23);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		btnCancel.setBounds(211, 415, 89, 23);
 		panel.add(btnCancel);
+		
+		setVisible(true);
 	}
 }

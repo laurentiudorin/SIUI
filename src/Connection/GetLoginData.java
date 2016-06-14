@@ -5,11 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 public class GetLoginData extends DatabaseConection{
 	
 	private static String user;
 	private static String password;
-
+	private static String mod; 
 	
 	public boolean ReturnComfirmation(String user, String password) throws SQLException{
 		
@@ -23,12 +25,13 @@ public class GetLoginData extends DatabaseConection{
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 
-		String selectSQL = "SELECT ID, USERNAME, PASSWORD, MOD FROM LOGIN WHERE USERNAME = ? AND PASSWORD =?";
+		String selectSQL = "SELECT USERNAME, PASSWORD, MOD FROM PERSOANA WHERE USERNAME = ? AND PASSWORD =?";
 
 		try {
 			dbConnection = getDBConnection();
 			preparedStatement = dbConnection.prepareStatement(selectSQL);
 			//preparedStatement.setInt(1, 12);
+			//preparedStatement.setString(1, Sha256.sha256(user));   // 
 			preparedStatement.setString(1, user);
 			preparedStatement.setString(2, password);
 			
@@ -36,11 +39,18 @@ public class GetLoginData extends DatabaseConection{
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
+				user = rs.getString(1);
+				password = rs.getString(2);
+				mod = rs.getString(3);
+				
+				System.out.println(""+user+" "+password+" "+ mod);
+				
 				return true;
 			}
 
 		} catch (SQLException e) {
 
+			JOptionPane.showMessageDialog(null, e.getMessage());
 			System.out.println(e.getMessage());
 
 		} finally {

@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Connection.GetLoginData;
+import Encryption.Sha256;
 
 public class LogIn extends JFrame {
 
@@ -61,10 +62,11 @@ public class LogIn extends JFrame {
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					if (logindata.ReturnComfirmation(user_textField.getText(), password_textField.getText()))
+					if (logindata.ReturnComfirmation(user_textField.getText(), Sha256.sha256(password_textField.getText())))
 					{
 						new Main_Gui();
 						setVisible(false);

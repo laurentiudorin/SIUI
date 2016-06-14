@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -37,6 +39,17 @@ public class Main_Gui extends JFrame {
 			}
 		});
 		mnNew.add(mntmReteta);
+		
+		JMenu mnRegister = new JMenu("Register");
+		menuBar.add(mnRegister);
+		
+		JMenuItem mntmRegister = new JMenuItem("Register");
+		mntmRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Register();
+			}
+		});
+		mnRegister.add(mntmRegister);
 		
 		JMenu mnExit = new JMenu("Exit");
 		menuBar.add(mnExit);
