@@ -1,24 +1,25 @@
 package GUI;
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Connection.GetLoginData;
 import Connection.GetRetetaData;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.sql.SQLException;
+import Connection.GetRetetaData2;
 
 public class Reteta extends JFrame {
 
@@ -45,6 +46,9 @@ public class Reteta extends JFrame {
 	private JTextField textField_S;
 	private JTextField textField_Pret;
 
+	
+	DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	Calendar cal = Calendar.getInstance();
 	
 	/**
 	 * Create the frame.
@@ -75,6 +79,7 @@ public class Reteta extends JFrame {
 					System.out.println("am apasat pe enter");
 					try {
 						GetRetetaData.selectRecordsFromTable(textField_CNP.getText());
+						GetRetetaData2.selectRecordsFromTable(textField_CNP.getText());
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -90,6 +95,17 @@ public class Reteta extends JFrame {
 					textField_Parafa.setText(GetRetetaData.getParafa());
 					textField_Domeniu.setText(GetRetetaData.getDomeniu());
 					textField_Ambulatoriu.setText(GetRetetaData.getAmbulatoriu());
+					
+					textField_Nr_Reteta.setText(GetRetetaData2.getNrReteta());
+					textField_DataPrezenta.setText(dateFormat.format(cal.getTime()));
+					textField_Diagnostic.setText(GetRetetaData2.getDiagnostic());
+					textField_DataDepisatarii.setText(GetRetetaData2.getDataDepistarii());
+					textField_Medicamentatie.setText(GetRetetaData2.getMedicament());
+					textField_Cantitate.setText(GetRetetaData2.getCantitate());
+					textField_D.setText(GetRetetaData2.getD());
+					textField_P.setText(GetRetetaData2.getP());
+					textField_S.setText(GetRetetaData2.getS());
+					//textField_Pret.setText(GetRetetaData2.get);   aici forula este extrasa din medicament.pret*cantitate
 								}
 			}
 		});

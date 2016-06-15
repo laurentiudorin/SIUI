@@ -43,12 +43,20 @@ public class Main_Gui extends JFrame {
 		JMenu mnRegister = new JMenu("Register");
 		menuBar.add(mnRegister);
 		
-		JMenuItem mntmRegister = new JMenuItem("Register");
+		JMenuItem mntmRegister = new JMenuItem("Medic");
 		mntmRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Register();
 			}
 		});
+		
+		JMenuItem mntmPersoana = new JMenuItem("Persoana");
+		mntmPersoana.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new RegisterPersoana();
+			}
+		});
+		mnRegister.add(mntmPersoana);
 		mnRegister.add(mntmRegister);
 		
 		JMenu mnExit = new JMenu("Exit");
@@ -60,6 +68,16 @@ public class Main_Gui extends JFrame {
 				System.exit(0);
 			}
 		});
+		
+		JMenuItem mntmLogOut = new JMenuItem("Log Out");
+		mntmLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				LogIn log = new LogIn();
+				log.setVisible(true);
+			}
+		});
+		mnExit.add(mntmLogOut);
 		mnExit.add(mntmExit);
 		
 		
