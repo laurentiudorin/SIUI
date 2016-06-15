@@ -9,10 +9,17 @@ import javax.swing.JOptionPane;
 
 public class GetLoginData extends DatabaseConection{
 	
+	private static String cnp;
 	private static String user;
 	private static String password;
 	private static String mod; 
+	private static String nume; 
+	private static String prenume; 
 	
+	public static String getCnp() {
+		return cnp;
+	}
+
 	public boolean ReturnComfirmation(String user, String password) throws SQLException{
 		
 		this.user = user;
@@ -25,7 +32,7 @@ public class GetLoginData extends DatabaseConection{
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 
-		String selectSQL = "SELECT USERNAME, PASSWORD, MOD FROM PERSOANA WHERE USERNAME = ? AND PASSWORD =?";
+		String selectSQL = "SELECT CNP, USERNAME, PASSWORD, MOD, NUME, PRENUME FROM PERSOANA WHERE USERNAME = ? AND PASSWORD =?";
 
 		try {
 			dbConnection = getDBConnection();
@@ -39,9 +46,12 @@ public class GetLoginData extends DatabaseConection{
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				user = rs.getString(1);
-				password = rs.getString(2);
-				mod = rs.getString(3);
+				cnp 	= rs.getString(1);
+				user 	= rs.getString(2);
+				password = rs.getString(3);
+				mod 	= rs.getString(4);
+				nume 	= rs.getString(5);
+				prenume = rs.getString(6);
 				
 				System.out.println(""+user+" "+password+" "+ mod);
 				
@@ -66,6 +76,14 @@ public class GetLoginData extends DatabaseConection{
 		}
 		return false;
 
+	}
+	
+	public static String getNume() {
+		return nume;
+	}
+
+	public static String getPrenume() {
+		return prenume;
 	}
 
 }

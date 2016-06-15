@@ -5,12 +5,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Connection.GetLoginData;
+import Connection.GetRetetaData;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 public class Reteta extends JFrame {
 
@@ -58,6 +66,33 @@ public class Reteta extends JFrame {
 		panel.add(lblCnp);
 		
 		textField_CNP = new JTextField();
+		textField_CNP.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode() == KeyEvent.VK_ENTER){
+					
+					System.out.println("am apasat pe enter");
+					try {
+						GetRetetaData.selectRecordsFromTable(textField_CNP.getText());
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					textField_Nume.setText(GetRetetaData.getNume());
+					textField_Prenume.setText(GetRetetaData.getPrenume());
+					textField_DataNasteri.setText(GetRetetaData.getDataNasteri());
+					textField_Adresa.setText(GetRetetaData.getAdresa());
+					textField_Tara.setText(GetRetetaData.getTara());
+					textField_NumeM.setText(GetLoginData.getNume());
+					textField_PrenumeM.setText(GetLoginData.getPrenume());
+					textField_Parafa.setText(GetRetetaData.getParafa());
+					textField_Domeniu.setText(GetRetetaData.getDomeniu());
+					textField_Ambulatoriu.setText(GetRetetaData.getAmbulatoriu());
+								}
+			}
+		});
 		textField_CNP.setBounds(86, 53, 138, 20);
 		panel.add(textField_CNP);
 		textField_CNP.setColumns(10);
